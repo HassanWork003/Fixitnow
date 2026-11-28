@@ -698,3 +698,5 @@ exports.updateStatus = async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to update status', error: error.message });
   }
 };
+
+// Force Railway update
