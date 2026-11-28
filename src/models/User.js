@@ -24,7 +24,12 @@ const userSchema = new mongoose.Schema(
       enum: ['citizen', 'admin'],
       default: 'citizen',
     },
-
+//===============
+    assignedDistricts: {
+      type: [String],
+      default: [], // Empty array means no restriction (or superadmin)
+    },
+//===============
     // Firebase UID links this MongoDB user to Firebase Auth
     firebaseUid: {
       type: String,

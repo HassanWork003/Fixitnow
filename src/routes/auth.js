@@ -64,6 +64,7 @@ router.post('/sync', async (req, res) => {
         email: user.email,
         phone: user.phone,
         role: user.role,
+        assignedDistricts: user.assignedDistricts, // 👈 Add this
       },
     });
   } catch (error) {
@@ -111,6 +112,7 @@ router.get('/me', async (req, res) => {
         email: user.email,
         phone: user.phone,
         role: user.role,
+        assignedDistricts: user.assignedDistricts, // 👈 Add t
       },
     });
   } catch (error) {
@@ -298,6 +300,7 @@ router.patch('/profile', async (req, res) => {
         email: user.email,
         phone: user.phone,
         role: user.role,
+        assignedDistricts: user.assignedDistricts, // 👈 Add this
       },
     });
   } catch (error) {

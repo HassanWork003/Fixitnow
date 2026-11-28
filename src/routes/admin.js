@@ -39,7 +39,8 @@ router.get('/stats', async (req, res) => {
 // Create a new admin
 router.post('/create-admin', superAdminOnly, async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    // const { name, email, password } = req.body;
+    const { name, email, password, assignedDistricts = [] } = req.body;
 
     if (!name || !email || !password) {
       return res.status(400).json({
@@ -77,6 +78,7 @@ router.post('/create-admin', superAdminOnly, async (req, res) => {
       name: name.trim(),
       email: cleanEmail,
       role: 'admin',
+      assignedDistricts: assignedDistricts, // 👈 Add this
     });
 
     return res.status(201).json({
@@ -87,6 +89,7 @@ router.post('/create-admin', superAdminOnly, async (req, res) => {
         name: newAdmin.name,
         email: newAdmin.email,
         role: newAdmin.role,
+        assignedDistricts: newAdmin.assignedDistricts, // 👈 Add this
       },
     });
   } catch (error) {
@@ -172,7 +175,8 @@ router.delete('/:id', superAdminOnly, async (req, res) => {
 router.get('/list-admins', async (req, res) => {
   try {
     const admins = await User.find({ role: 'admin' })
-      .select('name email role createdAt')
+      // .select('name email role createdAt')
+      .select('name email role assignedDistricts createdAt')
       .sort({ createdAt: -1 });
 
     return res.json({
